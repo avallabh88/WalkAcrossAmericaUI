@@ -1,0 +1,10 @@
+{
+  "name"         : "dashboardwebsite",
+  "version"      : "0.0.0",
+  "description"  : "Dashboard web site.",
+  "main"         : "server.js",
+  "author"       : "Scotch",
+  "dependencies" : {
+    "express"        : "^4.13.4"
+  }
+}

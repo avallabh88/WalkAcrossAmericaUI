@@ -1,0 +1,22 @@
+<div id="wrap">
+  <main id="main" class="container-fluid clear-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" style="padding-left: 15px;" id="websiteHeader">
+            Walk Across America
+          </a>
+        </div>
+      </div>
+    </nav>
+    <div ui-view id='content-container'></div>
+  </main>
+</div>
+<footer class="footer">
+  <div class="pull-right">
+    <span ng-repeat="version in app.versions">
+      {{ version.description }} v{{ version.version }} <span ng-hide="$last"> | </span>
+    </span>
+  </div>
+  <img alt="User" src="/img/logo-footer.png">
+</footer>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <zip basedir="C:\VueForge\Software\Source Code\I40VFD/target/VFD/" destfile="C:\VueForge\Software\Source Code\I40VFD/target/VFD-1.0-SNAPSHOT.zip"/>
+</target>
+</project>

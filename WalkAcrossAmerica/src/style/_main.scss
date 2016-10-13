@@ -1,0 +1,228 @@
+// Header
+html, body, #app-container {
+  height: 100%;
+}
+
+
+#wrap {
+  min-height: 99.9%;
+}
+
+#main {
+  overflow: auto;
+  padding-bottom: $footer-height;
+}
+
+#content-container {
+  margin-top: ($navbar-height + $navbar-margin-bottom);
+  height: 100%;
+}
+
+.footer {
+  position: relative;
+  margin-top: (-$footer-height); /* negative value of footer height */
+  height: $footer-height;
+  clear: both;
+  font-size: $font-size-small;
+  line-height: $footer-height;
+  padding: 0 ($grid-gutter-width / 2);
+  border-top: solid 1px $gray-light;
+  background-color: #fff;
+}
+
+.not-implemented {
+  text-align: center;
+  font-size: $font-size-large;
+  margin-top: 150px;
+
+  .glyphicon {
+    font-size: 72px;
+    color: $brand-danger;
+  }
+}
+
+// panel header padding = 10
+// panel bottom margin = 20
+// panel borders = 3
+$map-height-inverse: ($navbar-height + $navbar-margin-bottom + $footer-height + ($font-size-base * $line-height-base) + ((10 + $panel-body-padding) * 2) + 20 + 3);
+$map-height: calc(100vh - #{$map-height-inverse});
+
+#map {
+  width: 100%;
+  height: 700px;
+}
+
+#usermap{
+  width: 100%;
+  height:760px;
+}
+
+#toolsTab{
+  width: 100%;
+  height: 700px;
+}
+
+#alarmsTab{
+  width: 100%;
+  height: 700px;
+}
+
+#sitesTab{
+  width: 100%;
+  height: 700px;
+}
+
+#pareto {
+  width: 100%;
+  height: 300px;
+}
+
+.tooldetail{
+  .tool-detail-container{
+    .tools-panel{
+      height: 100%;
+    }
+  }
+}
+
+div.scrolling-container {
+  height: 200px;
+  overflow: scroll;
+  background-color: lightgray;
+}
+
+
+.tooldetail{
+  height: 100%;
+}
+
+#toolAvailability {
+  width: 100%;
+  height: 150px;
+}
+
+#alarmsPareto {
+  width: 100%;
+  height: 200px;
+}
+
+#mcbf {
+  width: 100%;
+  height: 257px;
+}
+
+
+.selected {
+  background-color:$gray-light;
+  color:white;
+  font-weight:bold;
+}
+
+.toolImage {
+  text-shadow: -2px 0 blue, 0 2px blue, 2px 0 blue, 0 -2px blue;
+  font-size: 1.8em;
+}
+
+//.toolDetailsRow{
+//  width:50%;
+//}
+
+#datapoint {
+  width: 100%;
+  height: 100%;
+}
+
+#toolStateHistory{
+  width: 100%;
+  height: 100%;
+}
+
+#toolMap {
+  width: 100%;
+  height: 550px;
+}
+
+.plant{
+  .tools-panel{
+    .panel-heading{
+      background-color: #ffffff;
+    }
+  }
+}
+
+.plant{
+  .tools-panel {
+    height: 820px;
+  }
+}
+
+.plant{
+  .availability-panel{
+    .panel-heading{
+      color: #333333;
+      background-color: #ffffff;
+    }
+  }
+}
+
+th {
+  color: #666666;
+}
+
+tr{
+  color: #333333;
+}
+
+
+
+.dashboard {
+  .map-container {
+    min-height: 100%;
+  }
+
+  .alarm-panel {
+    .panel-body {
+      display: table;
+      margin: auto;
+    }
+
+    .row {
+      display: table-row;
+    }
+
+    .text-danger {
+      .icon {
+        color: $brand-danger;
+      }
+    }
+
+    .text-warning {
+      .icon {
+        color: $brand-warning;
+      }
+    }
+
+    .text-info {
+      .icon {
+        color: $brand-info;
+      }
+    }
+
+    .text-success {
+      .icon {
+        color: $brand-success;
+      }
+    }
+
+    .alarm-tile {
+      display: table-cell;
+      padding: $padding-large-vertical $padding-large-horizontal;
+      width: 50%;
+
+      .caption {
+        text-align: center;
+        padding: $padding-base-vertical $padding-base-vertical;
+      }
+    }
+  }
+}

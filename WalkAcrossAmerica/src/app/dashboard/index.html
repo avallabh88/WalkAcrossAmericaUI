@@ -1,0 +1,75 @@
+<div class='container-fluid dashboard'>
+  <div class='row'>
+    <div class='col-lg-5 col-md-6 col-sm-12'>
+      <div class='row'>
+        <div class='col-xs-12'>
+          <div class='panel panel-default alarm-panel'>
+            <div class='panel-heading'>Alarms</div>
+            <div class='panel-body'>
+              <div class='row'>
+                <div class='alarm-tile text-danger'>
+                  <div class='icon'>
+                    <i class='fa fa-times-circle fa-3x'></i> <span class='fa-3x'>{{ dashboard.alarms.urgent }}</span>
+                  </div>
+                  <div class='caption bg-danger'>Urgent</div>
+                </div>
+                <div class='alarm-tile text-warning'>
+                  <div class='icon'>
+                    <i class='fa fa-exclamation-triangle fa-3x'></i> <span class='fa-3x'>{{ dashboard.alarms.warning }}</span>
+                  </div>
+                  <div class='caption bg-warning'>Warning</div>
+                </div>
+              </div>
+              <div class='row'>
+                <div class='alarm-tile text-success'>
+                  <div class='icon'>
+                    <i class='fa fa-info-circle fa-3x'></i> <span class='fa-3x'>{{ dashboard.alarms.information }}</span>
+                  </div>
+                  <div class='caption bg-success'>Information</div>
+                </div>
+                <div class='alarm-tile text-info'>
+                  <div class='icon'>
+                    <i class='fa fa-clock-o fa-3x'></i> <span class='fa-3x'>{{ dashboard.alarms.maintenance }}</span>
+                  </div>
+                  <div class='caption bg-info'>Maintenance</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-xs-12'>
+          <div class='panel panel-default'>
+            <div class='panel-heading'>Alarm Pareto</div>
+            <div class='panel-body'>
+              <div id="pareto"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-xs-12'>
+          <div class='panel panel-default'>
+            <div class='panel-heading'>Chart 2</div>
+            <div class='panel-body'>
+              Lorem Ipsum
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='col-lg-7 col-md-6 col-sm-12'>
+      <div class='row map-container'>
+        <div class='col-xs-12'>
+          <div class='panel panel-default'>
+            <div class='panel-heading'>Map</div>
+            <div class='panel-body'>
+              <div id="map"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
