@@ -3,8 +3,6 @@ import AdminCtrl from './admin'
 import DashboardCtrl from './dashboard'
 import ReportsCtrl from './reports'
 import SearchCtrl from './search'
-import ToolDetailsCtrl from './plant/tooldetails'
-import CESToolDetailsCtrl from './ces/tooldetails'
 import HomeCtrl from './home'
 import RegisterCtrl from './registration'
 import UserCtrl from './userdashboard'
@@ -67,31 +65,6 @@ export default ['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRou
       template: require('./search/index.html'),
       controller: 'SearchCtrl',
       controllerAs: 'search'
-    })
-
-    .state('app.plant', {
-      url: 'plant/dashboard',
-      template: require('./plant/dashboard/index.html'),
-      controller: 'ManufacturingPlantCtrl',
-      controllerAs: 'manufacturingplant'
-    })
-    .state('app.tooldetails', {
-      url: 'tooldetails/:toolID',
-      template: require('./plant/tooldetails/index.html'),
-      controller: 'ToolDetailsCtrl',
-      controllerAs: 'tooldetails'
-    })
-    .state('app.ces', {
-      url: 'ces/dashboard',
-      template: require('./ces/dashboard/index.html'),
-      controller: 'CESDashboardCtrl',
-      controllerAs: 'cesdashboard'
-    })
-    .state('app.cestooldetails', {
-      url: 'ces/tooldetails/:toolID',
-      template: require('./ces/tooldetails/index.html'),
-      controller: 'CESToolDetailsCtrl',
-      controllerAs: 'cestooldetails'
     });
 
 
