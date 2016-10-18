@@ -1,4 +1,4 @@
 export default {
-  name: "WalkAcrossAmerica",
+  name: "WalkAcrossAmericaUI",
   version: "0.0.1"
 }

@@ -24,124 +24,160 @@ export default class UserCtrl {
             $('#errorMessageDiv').hide();
         });
 
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8081/hello/',
-            headers: {
-                'Content-Type': 'application/json'
-            }
 
-        }).then(
-            function(response){
-                console.log("The response from hello is:" + response);
-            },
-            function(response){
-                console.log("The error response from hello is:" + response);
-            }
-        );
+        //initializing the values on the form
+        $scope.init = function() {
+            teamLocations();
+        };
 
-        $http.get(hostNameService.getHostName()+"/hello/")
-            .then(function (response) {console.log("The response from hello is:" + response)});
 
-        $scope.addNewTeam = function() {//function to add new team
-            var    method = "PUT";
-            var    url = hostNameService.getHostName() + "/team/";
-            var data = {
-                name: $scope.teamname,
-                description: $scope.teamdescription
-            };
+        //function to plot the teams on the map based on the number of steps ccovered
+        var teamLocations = function () {
             $http({
-                method : method,
-                url : url,
-                data : data,
+                method : 'GET',
+                url : hostNameService.getHostName() + "/team/locations",
                 headers : {
-                    'Content-Type' : 'application/json'
+                    'Content-Type' : 'application/json',
                 }
             }).then(
                 function(response){
-                    $scope.message= 'New team has been added successfully.'
-                    $('#successmessageDiv').show();
+                    $scope.teamLocations = response.data;
+
+                    var mapOptions = {
+                        zoom: 5,
+                        center: new google.maps.LatLng(40.0000, -98.0000),
+                        mapTypeId: google.maps.MapTypeId.TERRAIN
+                    }
+
+                    $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+                    $scope.markers = [];
+
+                    var pointA = new google.maps.LatLng(42.491796, -71.2282649),
+                        pointB = new google.maps.LatLng(37.7749295, -122.4194155),
+                    // Instantiate a directions service.
+                        directionsService = new google.maps.DirectionsService,
+                        directionsDisplay = new google.maps.DirectionsRenderer({
+                            map: $scope.map
+                        }),
+                        markerA = new google.maps.Marker({
+                            position: pointA,
+                            title: "point A",
+                            label: "A",
+                            map: $scope.map
+                        }),
+                        markerB = new google.maps.Marker({
+                            position: pointB,
+                            title: "point B",
+                            label: "B",
+                            map: $scope.map
+                        });
+
+                    //calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB);
+
+                    var infoWindow = new google.maps.InfoWindow();
+                    var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+
+                    var createMarker = function (info){
+                        var marker = new google.maps.Marker({
+                            map: $scope.map,
+                            position: new google.maps.LatLng(info.latitude, info.longitude),
+                            title: info.teamName,
+                            icon: {
+                                path: google.maps.SymbolPath.CIRCLE,
+                                strokeColor: info.teamColor,
+                                scale: 6
+                            },
+                        });
+                        marker.content = '<div class="infoWindowContent">' + "Total Steps:" +info.totalStepCount + '</div>';
+
+                        google.maps.event.addListener(marker, 'click', function(){
+                            infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
+                            infoWindow.open($scope.map, marker);
+                        });
+                        infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
+                        infoWindow.open($scope.map, marker);
+
+                        $scope.markers.push(marker);
+                    }
+
+
+                    var createMilestone = function (info){
+                        var milestone = new google.maps.Marker({
+                            map: $scope.map,
+                            position: new google.maps.LatLng(info.latitude, info.longitude),
+                            title: 'Milestone',
+                            icon: {
+                                path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                                scale: 1
+                            },
+                        });
+                        google.maps.event.addListener(milestone, 'click', function(){
+                            infoWindow.setContent('<h2>' + marker.title);
+                            infoWindow.open($scope.map, milestone);
+                        });
+
+                        $scope.markers.push(milestone);
+                    }
+
+                    for (var i = 0; i < $scope.teamLocations.length; i++){
+                        createMarker($scope.teamLocations[i]);
+                    }
+
+                    //web service returning milestones
+                    $http({
+                        method : 'GET',
+                        url : hostNameService.getHostName() + "/team/tracks",
+                        headers : {
+                            'Content-Type' : 'application/json',
+                        }
+                    }).then(
+                        function(response) {
+                            $scope.teamTracks = response.data;
+                            for (var i = 0; i < $scope.teamTracks.length; i++){
+                                createMilestone($scope.teamTracks[i]);
+                            }
+                        },
+                        function(response) {
+
+                        }
+                    );
+
+
+                    $scope.openInfoWindow = function(e, selectedMarker){
+                        e.preventDefault();
+                        google.maps.event.trigger(selectedMarker, 'click');
+                    }
+
+                    //the following function can be called when we want to show the direction from start to end point
+                    // function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB) {
+                    //     directionsService.route({
+                    //         origin: pointA,
+                    //         destination: pointB,
+                    //         travelMode: google.maps.TravelMode.BICYCLING
+                    //     }, function(response, status) {
+                    //         if (status == google.maps.DirectionsStatus.OK) {
+                    //             directionsDisplay.setDirections(response);
+                    //         } else {
+                    //             window.alert('Directions request failed due to ' + status);
+                    //         }
+                    //     });
+                    // }
+
                 },
                 function(response){
-                    $scope.message= 'Error in creating a new team.'
-                    $('#errorMessageDiv').show();
+
                 }
             );
-
         }
 
 
-        var cities = [
-            {
-                city : 'New York',
-                desc : 'This city is aiiiiite!',
-                lat : 40.6700,
-                long : -73.9400,
-                image : 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
-            },
-            {
-                city : 'Chicago',
-                desc : 'This is the second best city in the world!',
-                lat : 41.8819,
-                long : -87.6278,
-                image : 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
-            },
-            {
-                city : 'Los Angeles',
-                desc : 'This city is live!',
-                lat : 34.0500,
-                long : -118.2500,
-                image : 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
-            },
-            {
-                city : 'Las Vegas',
-                desc : 'Sin City...\'nuff said!',
-                lat : 36.0800,
-                long : -115.1522,
-                image : 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
-            }
-        ];
 
-        var mapOptions = {
-            zoom: 5,
-            center: new google.maps.LatLng(40.0000, -98.0000),
-            mapTypeId: google.maps.MapTypeId.TERRAIN
-        }
 
-        $scope.map = new google.maps.Map(document.getElementById('usermap'), mapOptions);
 
-        $scope.markers = [];
 
-        var infoWindow = new google.maps.InfoWindow();
-        var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
 
-        var createMarker = function (info){
 
-            var marker = new google.maps.Marker({
-                map: $scope.map,
-                position: new google.maps.LatLng(info.lat, info.long),
-                title: info.city,
-                icon: info.image
-            });
-            marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
-
-            google.maps.event.addListener(marker, 'click', function(){
-                infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
-                infoWindow.open($scope.map, marker);
-            });
-
-            $scope.markers.push(marker);
-
-        }
-
-        for (var i = 0; i < cities.length; i++){
-            createMarker(cities[i]);
-        }
-
-        $scope.openInfoWindow = function(e, selectedMarker){
-            e.preventDefault();
-            google.maps.event.trigger(selectedMarker, 'click');
-        }
 
     }
 }

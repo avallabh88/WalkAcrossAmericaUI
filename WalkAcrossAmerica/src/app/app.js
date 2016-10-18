@@ -48,9 +48,6 @@ angular.module(constants.MODULE_NAME).config(routerConfig);
 
 
 angular.module(constants.MODULE_NAME).run(['$httpBackend', function($httpBackend) {
-    $httpBackend.whenPUT("http://localhost:8081/team/").passThrough();
-    $httpBackend.whenGET("http://localhost:8081/hello/").passThrough();
-    $httpBackend.whenGET("http://localhost:8081/team/").passThrough();
     $httpBackend.whenPUT(/\/team/).passThrough();
     $httpBackend.whenGET(/\/team/).passThrough();
     $httpBackend.whenPUT(/\/member/).passThrough();

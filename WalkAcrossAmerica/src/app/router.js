@@ -1,8 +1,6 @@
 import AppCtrl from './app-controller'
 import AdminCtrl from './admin'
 import DashboardCtrl from './dashboard'
-import ReportsCtrl from './reports'
-import SearchCtrl from './search'
 import HomeCtrl from './home'
 import RegisterCtrl from './registration'
 import UserCtrl from './userdashboard'
@@ -51,20 +49,6 @@ export default ['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRou
       template: require('./dashboard/index.html'),
       controller: 'DashboardCtrl',
       controllerAs: 'dashboard'
-    })
-
-    .state('app.reports', {
-      url: 'reports',
-      template: require('./reports/index.html'),
-      controller: 'ReportsCtrl',
-      controllerAs: 'reports'
-    })
-
-    .state('app.search', {
-      url: 'search',
-      template: require('./search/index.html'),
-      controller: 'SearchCtrl',
-      controllerAs: 'search'
     });
 
 
