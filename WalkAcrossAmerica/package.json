@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "description": "Walk Across America UI",
   "scripts": {
-    "postinstall": "winser -i -s -c",
-    "preuninstall": "winser -r -x -s",
+    "install-windows-service": "winser -i",
+    "uninstall-windows-service": "winser -r",
     "build": "rimraf dist && webpack",
-    "server": "webpack-dev-server --history-api-fallback --inline --progress --port 9082",
+    "server": "webpack-dev-server --host 0.0.0.0 --history-api-fallback --inline --progress --port 9082",
     "test": "karma start",
     "test-watch": "karma start --auto-watch --no-single-run",
     "start": "npm run server"
