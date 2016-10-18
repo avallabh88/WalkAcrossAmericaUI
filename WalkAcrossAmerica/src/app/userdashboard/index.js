@@ -2,7 +2,6 @@
  * Created by avallabhaneni on 10/12/2016.
  */
 import constants from '../constants'
-import angular from 'angular';
 
 export default class UserCtrl {
 

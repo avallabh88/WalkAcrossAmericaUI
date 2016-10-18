@@ -2,7 +2,6 @@
  * Created by avallabhaneni on 10/11/2016.
  */
 import constants from '../constants'
-import angular from 'angular';
 
 export default class HomeCtrl {
 

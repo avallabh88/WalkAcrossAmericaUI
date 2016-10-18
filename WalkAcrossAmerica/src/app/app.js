@@ -57,9 +57,11 @@ angular.module(constants.MODULE_NAME).run(['$httpBackend', function($httpBackend
 
 angular.module(constants.MODULE_NAME).controller('AppCtrl', ['$scope', '$state', '$log', '$http', 'HostNameService', 'ContextService', function ($scope, $state, $log, $http, hostNameService, contextService) {
 
-
+       
         if ($state.current.name == 'app'){
                 $state.go("app.admin");
+        }else{
+            $state.go("app.home");
         }
 
 
