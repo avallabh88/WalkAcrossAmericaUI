@@ -1,4 +1,4 @@
 export default {
-  name: "vueforge-demo",
+  name: "WalkAcrossAmerica",
   version: "0.0.1"
 }

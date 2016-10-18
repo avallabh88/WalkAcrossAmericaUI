@@ -1,19 +1,22 @@
 {
-  "name": "vueforge-demo",
+  "name": "WalkAcrossAmericaUI",
   "version": "0.0.1",
-  "description": "VueForge sales demonstrator UI",
+  "description": "Walk Across America UI",
   "scripts": {
+    "postinstall": "winser -i -s -c",
+    "preuninstall": "winser -r -x -s",
     "build": "rimraf dist && webpack",
     "server": "webpack-dev-server --history-api-fallback --inline --progress --port 9082",
     "test": "karma start",
     "test-watch": "karma start --auto-watch --no-single-run",
     "start": "npm run server"
+	
   },
   "repository": {
     "type": "svn",
     "url": "https://aco-vfd.corp.foliage.com/svn/ACO-VFD/"
   },
-  "author": "Jonathan Burk",
+  "author": "Avinash Vallabhaneni",
   "license": "UNLICENSED",
   "bugs": {
     "url": "ttstudio://qms-issues:99//16-0056-XXX%20VueForge%20Demo/home"
